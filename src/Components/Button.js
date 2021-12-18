@@ -1,13 +1,10 @@
-import { compose } from "async";
+
 import React from "react";
-import { Component } from "react/cjs/react.production.min";
 import './Button.css'
 
 
     class Button extends React.Component{
-        constructor(props){
-            super(props)
-        };
+        
         onHandleClick=()=>{
        this.props.onHandleClick()
         }
