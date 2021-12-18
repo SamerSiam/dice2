@@ -1,4 +1,5 @@
 .Player{
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -6,6 +7,37 @@
     height:30vh;
     border: 1px solid red;
     background-color:rgb(100, 240, 100);
+    font-family: Arial, Helvetica, sans-serif;
     margin: 5vw;
     
+}
+
+.player-id{
+
+    font-size: 2rem;
+    font-weight: bold;
+    color: grey;
+}
+
+.current-score{
+    font-size: 15px;
+    color: grey;
+    
+}
+.global-score{
+    font-size: 15px;
+    color: grey;
+    border-top: 2px solid grey; 
+    
+}
+
+.active-player{
+    font-size: 2rem;
+    animation: glow 0.5s infinite alternate;
+}
+
+@keyframes glow {
+    to {
+        text-shadow: 0 0 20px red;
+    }
 }
