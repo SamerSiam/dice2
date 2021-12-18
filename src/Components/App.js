@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Player from './Components/Player';
-import Button from './Components/Button';
-import Dice from './Components/Dice';
+import Player from './Player';
+import Button from './Button';
+import Dice from './Dice';
 
 class App extends React.Component {
 
