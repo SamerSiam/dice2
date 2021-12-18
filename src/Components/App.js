@@ -8,8 +8,8 @@ class App extends React.Component {
 
   state = {
     pointsToWin: 100,
-    dice1: 6,
-    dice2: 6,
+    dice1: null,
+    dice2: null,
     activePlayer: 1,
     winner: false,
     players: [
@@ -27,7 +27,8 @@ class App extends React.Component {
 
   }
 
-
+/*********************Roll Dice *****************************
+    * ************** */ 
    
   diceRoll= ()=> {
     console.log('Inside dice roll')
@@ -58,7 +59,9 @@ class App extends React.Component {
 
   }
 
-   
+   /*********************Hold Turn*****************************
+   this passed the turn to the other player
+   * ************** */ 
    holdTurn= ()=> {
     console.log('Inside Hold Turn')
     this.setState((state) => {
@@ -75,22 +78,29 @@ class App extends React.Component {
       
     }
 
-    
+   /*********************New Game*****************************
+    * ************** */ 
 
     newGame=()=>{
       console.log('Inside New Game')
     }
 
+    /*********************RENDER*****************************
+    * ************** */ 
+
   render(){
     return (
+      
       <div className="App">
         
-        
         <Player PlayerNum= {this.state.players[0].id} currentScore={this.state.players[0].currentScore} globalScore= {this.state.players[0].globalScore}/>
-        <div><Dice id={this.state.dice1}/>
-        <Dice id={this.state.dice2}/></div>
         
-        <div>
+        <div className='dice-container'>
+        <Dice id={this.state.dice1}/>
+        <Dice id={this.state.dice2}/>
+        </div>
+        
+        <div className='button-container'>
         <Button  text='New Game'onHandleClick = {this.newGame}/>
         <Button  text='Roll'onHandleClick = {this.diceRoll}/>
         <Button  text='Hold' onHandleClick = {this.holdTurn}/>

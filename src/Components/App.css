@@ -1,15 +1,19 @@
-body{
+*{
   padding:0;
   margin: 0;
   width: 100%;
-  
+}
+
+bod{
+  display: flex;
+  justify-content: center;
 }
 
 .App {
   margin: 0, auto;
   padding: 0;
   border: 1px solid red;
-  width: 90%;
+  width: 80%;
   height: 90vh;
   text-align: center;
   display: flex;
@@ -17,6 +21,22 @@ body{
   align-items: center;
   justify-content: space-between;
   
+}
+
+.title{
+  display: inline-block;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: column;
+  width: 10vw;
+}
+
+.dice-container{
+  display: flex;
+  flex-direction: column;
+  width: 10vw;
 }
 
 .App-logo {
