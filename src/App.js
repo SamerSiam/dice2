@@ -27,14 +27,7 @@ class App extends React.Component {
 
   }
 
-// componentDidUpdate(prevState){
-  
 
-// }
-
-  /***************************************************
-   * Roll Dice Function
-   */
    
   diceRoll= ()=> {
     console.log('Inside dice roll')
@@ -65,9 +58,6 @@ class App extends React.Component {
 
   }
 
-  /***************************************************
-   * Hold Turn  Function
-   */
    
    holdTurn= ()=> {
     console.log('Inside Hold Turn')
@@ -85,14 +75,12 @@ class App extends React.Component {
       
     }
 
-     /***************************************************
-   * New game reset  Function
-   */
+    
 
     newGame=()=>{
       console.log('Inside New Game')
     }
-  /*********************************RENDER********************* */
+
   render(){
     return (
       <div className="App">
