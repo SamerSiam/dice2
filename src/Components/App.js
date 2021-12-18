@@ -7,17 +7,18 @@ import Dice from './Dice';
 class App extends React.Component {
 
   state = {
-    pointsToWin: 100,
+    message:'',
+    pointsToWin: 20,
     dice1: null,
     dice2: null,
     activePlayer: 1,
-    winner: false,
+    winner: 0,
     players: [
         {
             id:1,
             currentScore: 0,
             globalScore: 0,
-            class:'player-id',
+            class:'active-player',
         },
         {
           id:2,  
@@ -29,19 +30,16 @@ class App extends React.Component {
 
   }
 
-
   /*********************************************************** */
   componentDidUpdate(prevState) {
-    // if (prevState.dice1 !== this.state.dice1 && prevState.dice2 !== this.state.dice2 ) {
-    //   console.log('dice state has changed-- inside did update')
-    //   this.calculateScore();
-    // }
+    
     if (prevState.activePlayer !== this.state.activePlayer)
     {
+     
       
-       // toggle glow animation based on active player
-    const activePlayer=this.getActivePlayer();
-    this.setState((state)=>{
+      // toggle glow animation based on active player
+      const activePlayer=this.getActivePlayer();
+      this.setState((state)=>{
       activePlayer.class='active-player'
     }); 
       
@@ -63,7 +61,6 @@ class App extends React.Component {
   }
 
 
-  
    // get non active player object based on activePlayer ID
    getNonActivePlayer = ()=> {
     const NonActivePlayerObj=this.state.players.find((player)=>{
@@ -75,43 +72,49 @@ class App extends React.Component {
     * ************** */ 
    
   diceRoll= ()=> {
-    console.log('Inside dice roll')
     const rand1= 1+Math.floor(Math.random()*6)
     const rand2= 1+Math.floor(Math.random()*6)
-  
       this.setState({
       dice1: rand1,
       dice2:rand2,
-      });
-
-    this.calculateScore();
-    console.log(this.state)
-   
-
-    // console.log('state after rollong sice', this.state)
-    
-  }
-  calculateScore= ()=> {
-      const activePlayerObj=this.getActivePlayer();
-      this.setState((state)=>{
-      activePlayerObj.currentScore=this.state.dice1 + this.state.dice2
-      // activePlayerObj.globalScore = activePlayerObj.globalScore
+      }, ()=>{
+        this.calculateScore();
+        this.winGame();
+      }); 
       
-    });
-    console.log(this.state)
+  }
+
+  /*********************Calculate Score ***********************
+    * ************ */ 
+
+  calculateScore= ()=> {
+      const updatedPlayers= [...this.state.players]
+      const activePlayerObj=this.getActivePlayer();
+      updatedPlayers.forEach((player)=>{
+        if (player.id===activePlayerObj.id)
+        {
+          player.currentScore+=this.state.dice1 + this.state.dice2
+        }
+      })
+      this.setState({players:updatedPlayers})
+   
   }
     
-
    /*********************Hold Turn*****************************
    this passed the turn to the other player
    * ************** */ 
    holdTurn= ()=> {
-    console.log('Inside Hold Turn')
     const activePlayerObj=this.getActivePlayer();
-    this.setState((state)=>{
-    activePlayerObj.globalScore =  activePlayerObj.currentScore
-    
-  });
+    const updatedPlayers= [...this.state.players]
+    updatedPlayers.forEach((player)=>{
+      if (player.id===activePlayerObj.id)
+      {
+        player.globalScore+=player.currentScore;
+        player.currentScore=0;
+      }
+    })
+    this.setState({players:updatedPlayers})
+
     this.setState((state) => {
 
       if (this.state.activePlayer===1)
@@ -123,7 +126,6 @@ class App extends React.Component {
       }
       
     });
-   
     
   }
 
@@ -131,7 +133,7 @@ class App extends React.Component {
     * ************** */ 
 
     newGame=()=>{
-      console.log('Inside New Game')
+      
       this.setState({
           dice1: null,
           dice2: null,
@@ -142,39 +144,61 @@ class App extends React.Component {
             id:1,
             currentScore: 0,
             globalScore: 0,
+            class:'active-player',
         },
         {
           id:2,  
           currentScore: 0,
           globalScore: 0,
+          class:'player-id',
         }
     ]
 
-  
         });
     }
+
+    winGame=()=>{
+      const updatedPlayers= [...this.state.players]
+      updatedPlayers.forEach((player)=>{
+        if (player.globalScore >= this.state.pointsToWin)
+        {
+          console.log("WINNER" , player.id)
+          this.setState.winner=player.id;
+          this.setState({message:"Winner is Player: " +player.id});
+        }
+      })
+      // const myMessage=this.setState.message;
+      
+      // this.setState.message="winner message";
+      console.log(this.state)
+    }
+  
     /*********************RENDER*****************************
     * ************** */ 
 
   render(){
-    return (
+    
+      return (
+      <div className="App"> 
+     
       
-      <div className="App">
-        
+      
         <Player className= {this.state.players[0].class} PlayerNum= {this.state.players[0].id} currentScore={this.state.players[0].currentScore} globalScore= {this.state.players[0].globalScore}/>
         
         <div className='dice-container'>
+       
         <Dice id={this.state.dice1}/>
         <Dice id={this.state.dice2}/>
         </div>
-        
+       
         <div className='button-container'>
+        <p className='active-player'> {this.state.message}</p> 
+        
         <Button  text='New Game'onHandleClick = {this.newGame}/>
         <Button  text='Roll'onHandleClick = {this.diceRoll}/>
         <Button  text='Hold' onHandleClick = {this.holdTurn}/>
         </div>
         
-
         <Player className= {this.state.players[1].class} PlayerNum= {this.state.players[1].id} currentScore={this.state.players[1].currentScore} globalScore= {this.state.players[1].globalScore}/>
         
         

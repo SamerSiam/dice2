@@ -9,30 +9,31 @@
     background-color:rgb(100, 240, 100);
     font-family: Arial, Helvetica, sans-serif;
     margin: 5vw;
+    font-size: 1rem;
+    color: grey;
     
 }
 
 .player-id{
 
-    font-size: 2rem;
     font-weight: bold;
     color: grey;
 }
 
 .current-score{
-    font-size: 15px;
+    font-size: 1rem;
     color: grey;
     
 }
 .global-score{
-    font-size: 15px;
+    font-size: 1rem;
     color: grey;
     border-top: 2px solid grey; 
     
 }
 
 .active-player{
-    font-size: 2rem;
+    font-size: 1.5rem;
     animation: glow 0.5s infinite alternate;
 }
 
