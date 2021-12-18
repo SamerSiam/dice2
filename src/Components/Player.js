@@ -4,8 +4,7 @@ import './Player.css'
 
 
 class Player extends React.Component{
-    constructor(props){
-        super(props)
+    
     };
 
 

@@ -13,7 +13,7 @@ class Dice extends Component{
 
         return(
         <div className="dice-container">
-           <img src= {this.renderDice(this.props.id)}/>
+           <img src= {this.renderDice(this.props.id)} alt="dice roll"/>
 
            
         </div>
