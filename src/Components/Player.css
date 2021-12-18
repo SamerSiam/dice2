@@ -1,0 +1,9 @@
+.Player{
+   
+    width: 30vmin;
+    height:40vmin;
+    border: 1px solid red;
+    background-color: lightgreen;
+    margin: 10vw;
+    
+}
