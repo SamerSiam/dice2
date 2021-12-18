@@ -5,7 +5,7 @@ import './Player.css'
 
 class Player extends React.Component{
     
-    };
+   
 
 
     render (){
